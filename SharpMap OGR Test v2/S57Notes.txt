@@ -1,0 +1,16 @@
+These are some rough notes on the S57 file format.  The existing documentation on this is either fairly sparse or incredibly complex.  
+If you want to get in to the gory details then try to read the IHO documentation.  It is much more focused on how to generate the file
+than it is on how to use it.   By far, I got more out of closely examing the code from the gdal and sharpmap distribution than I did
+from reading all that stuff.
+
+In brief, a S57 file consists of a number of layers.  Some of the layers have displayable and some do not.  The non-displayable layers
+typically contain information about the map itself, while the displayable layers contain references to object.  It has to be noted that
+the S57 file contains no directly displayable information.  It contains objects that must be translated into their appropriate display 
+objects and color.  How to display the data in an S57 file requires the implementation of the S52 translation layer.  I have not got that
+far yet.
+
+The basic struction of each layer is exactly the same.  The first set of elements are the "Feature Definitions".  Each "Feature Defintion" has a name.
+
+  This dataset tells us 
+how to interpret the next layer.  For example, it contains data such as what data type each element, how many digits it contains, and what 
+precision it has.

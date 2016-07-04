@@ -1,0 +1,278 @@
+﻿This file is a holder for miscellanioius stuff that is not in use, but I didn't want to delete.
+
+
+
+        //  this will return the featureIDs for every feature in this view
+        //  use the layer extents so we get all features
+        var featureIds = thisLayer.GetObjectIDsInView(thisEnvelope);
+
+            foreach (uint featureID in featureIds)
+            {
+                // find the feature ID's for each feature in this layer and add them to the tree
+                // feature ID is a local counter that increments through the features in all layers of a map.
+                // It has no meaning outside the context of a local control.  It is NOT part of the S-57 map.
+
+                // featureID is an internal reference only.  It is NOT part of the S-57 defintion so do not add
+                // it to the tree.  It is only useful for diagnostic purposes.
+                DebugUtil.WriteLine("Feature ID: = " + featureID);
+
+                // get the information about the features using featureID
+                // if featureID is 0, there are no features represented
+                if (featureID > 0)
+                {
+                    thisFeature = thisLayer.GetGeometryByID(featureID);
+                    // the prior call can return a null if there are no features available for that ID
+                    if (thisFeature != null)
+                    {
+                        DebugUtil.WriteLine(thisFeature.GeometryType);
+
+                        thisFeatureChild = new TreeNode();
+
+                        thisFeatureChild.Text = thisFeature.GeometryType;
+
+                        // coordinates is an array of type Coordinate.  It will hold all the geometry coordinates
+                        coordinates = thisFeature.Coordinates;
+
+                        for (int i = 0; i < coordinates.Length; i++)
+                        {
+                            TreeUtil.AddChildNode(thisFeatureChild, coordinates[i].ToString(), "");
+                        }
+                        thisLayerRoot.Nodes.Add(thisFeatureChild);
+                    } // if thisFeature
+                }  // if featureID
+            }  // foreach
+
+#if false
+        class dummy1
+        {
+            // count down through the layers.  Need to get M_QUAL first.
+            for (Int32 i = provider.NumberOfLayers - 1; i >= 0; i--)
+            {
+                // get the data for this layer
+                provider = new Ogr(fileName, i);
+                layerName = provider.LayerName;
+                System.Diagnostics.Debug.WriteLine(string.Format("Layer {0}: {1}", i, layerName));
+
+                thisLayer = new VectorLayer(string.Format("Layer_{0}", layerName), provider);
+
+                featureCount = thisLayer.DataSource.GetFeatureCount();
+                System.Diagnostics.Debug.WriteLine("Feature Count: = " + featureCount);
+
+                // if this is defined as a feature layer, then render it.
+                var featureIds = thisLayer.DataSource.GetObjectIDsInView(thisLayer.Envelope);
+
+                foreach (uint featureID in featureIds)
+                {
+                    System.Diagnostics.Debug.WriteLine("Feature ID: = " + featureID);
+                    featureID.
+                }
+
+                if (provider.IsFeatureDataLayer)
+                {
+                    RenderS52(thisLayer);
+                    map.Layers.Add(thisLayer);
+                }
+            }
+        }
+
+        //
+        // Render the current layer according to the S-52 definition.
+        // There is obviously more going on here and it needs to be seperated
+        //
+        //static public VectorLayer RenderS52(Ogr prov, int layerNumber)
+        static public void RenderS52(VectorLayer layer)
+        {
+            Random rnd = new Random(9);
+
+            var type = layer.GetType();
+
+            if (layer.GetType())
+            // this is dummy code for now.  Needs to be replaced by S-52 code
+            if (provider.OgrGeometryTypeString.IndexOf("Polygon") > 0)
+            {
+                layer.Style.Fill =
+                    new SolidBrush(Color.FromArgb(150, Convert.ToInt32(rnd.NextDouble() * 255),
+                                                  Convert.ToInt32(rnd.NextDouble() * 255),
+                                                  Convert.ToInt32(rnd.NextDouble() * 255)));
+                layer.Style.Outline =
+                    new Pen(
+                        Color.FromArgb(150, Convert.ToInt32(rnd.NextDouble() * 255),
+                                       Convert.ToInt32(rnd.NextDouble() * 255),
+                                       Convert.ToInt32(rnd.NextDouble() * 255)),
+                        Convert.ToInt32(rnd.NextDouble() * 3));
+                layer.Style.EnableOutline = true;
+            }
+            else
+            {
+                layer.Style.Line =
+                    new Pen(
+                        Color.FromArgb(150, Convert.ToInt32(rnd.NextDouble() * 255),
+                                       Convert.ToInt32(rnd.NextDouble() * 255), Convert.ToInt32(rnd.NextDouble() * 255)),
+                        Convert.ToInt32(rnd.NextDouble() * 3));
+            }
+        }
+
+        static public TreeView Info(String fileName)
+        {
+            int i, count;
+            uint j;
+            TreeView myTreeView = new TreeView();
+            FeatureDataRow thisFeature;
+
+            // add the very first node as the file name so we can collapse to that
+            TreeNode rootNode = new TreeNode();
+            rootNode.Text = fileName;
+            myTreeView.Nodes.Add(rootNode);
+
+            Ogr myOgr = OgrS57Provider;
+
+            // count up through the layers.  Need to get M_QUAL first.
+            for (i = OgrS57NumberLayers() - 1; i >= 0; i--)
+            {
+                // get the data for this layer
+                Ogr prov = new Ogr(fileName, i);
+                TreeNode thisRoot = new TreeNode();
+                thisRoot.Text = prov.LayerName;
+                myTreeView.Nodes.Add(thisRoot);
+
+                if (prov.IsFeatureDataLayer == true)
+                {
+                    count = prov.GetFeatureCount();
+                    for (j = 0; j < count; j++)
+                    {
+                        TreeNode childNode = new TreeNode();
+                        prov.Open();
+                        thisFeature = prov.GetFeature(j);
+                        prov.Close();
+                        childNode.Text = thisFeature.ToString();
+                        thisRoot.Nodes.Add(childNode);
+                    }
+                    myTreeView.Nodes.Add(thisRoot);
+                }
+            }
+
+            return myTreeView;
+        }
+
+        private static Map InitializeMapinfo(String fileName, float angle)
+        {
+            //Initialize a new map of size 'imagesize'
+            Map map = new Map();
+
+            //Set up the countries layer
+            VectorLayer layCountries = new VectorLayer("Countries");
+            //Set the datasource to a shapefile in the App_data folder
+            try
+            {
+                layCountries.DataSource = new Ogr(fileName);
+            }
+            catch (TypeInitializationException ex)
+            {
+                if (ex.Message == "The type initializer for 'OSGeo.OGR.Ogr' threw an exception.")
+                {
+                    throw new Exception(
+                        String.Format(
+                            "The application threw a PINVOKE exception. You probably need to copy the unmanaged dll's to your bin directory. They are a part of fwtools {0}. You can download it from: http://home.gdal.org/fwtools/",
+                            GdalRasterLayer.FWToolsVersion));
+                }
+                throw;
+            }
+
+            //Set fill-style to green
+            layCountries.Style.Fill = new SolidBrush(Color.Green);
+            //Set the polygons to have a black outline
+            layCountries.Style.Outline = Pens.Black;
+            layCountries.Style.EnableOutline = true;
+            layCountries.SRID = 4326;
+
+            //Set up a river layer
+            VectorLayer layRivers = new VectorLayer("Rivers");
+            //Set the datasource to a shapefile in the App_data folder
+            layRivers.DataSource = new Ogr("GeoData/MapInfo/riversMapInfo.tab");
+            //Define a blue 1px wide pen
+            layRivers.Style.Line = new Pen(Color.Blue, 1);
+            layRivers.SRID = 4326;
+
+            //Set up a river layer
+            VectorLayer layCities = new VectorLayer("Cities");
+            //Set the datasource to a shapefile in the App_data folder
+            layCities.DataSource = new Ogr("GeoData/MapInfo/citiesMapInfo.tab");
+            layCities.Style.SymbolScale = 0.8f;
+            layCities.MaxVisible = 40;
+            layCities.SRID = 4326;
+
+            //Set up a country label layer
+            LabelLayer layLabel = new LabelLayer("Country labels");
+            layLabel.DataSource = layCountries.DataSource;
+            layLabel.Enabled = true;
+            layLabel.LabelColumn = "Name";
+            layLabel.Style = new LabelStyle();
+            layLabel.Style.ForeColor = Color.White;
+            layLabel.Style.Font = new Font(FontFamily.GenericSerif, 12);
+            layLabel.Style.BackColor = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
+            layLabel.MaxVisible = 90;
+            layLabel.MinVisible = 30;
+            layLabel.Style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
+            layLabel.SRID = 4326;
+            layLabel.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
+
+            //Set up a city label layer
+            LabelLayer layCityLabel = new LabelLayer("City labels");
+            layCityLabel.DataSource = layCities.DataSource;
+            layCityLabel.Enabled = true;
+            layCityLabel.LabelColumn = "Name";
+            layCityLabel.Style = new LabelStyle();
+            layCityLabel.Style.ForeColor = Color.Black;
+            layCityLabel.Style.Font = new Font(FontFamily.GenericSerif, 11);
+            layCityLabel.MaxVisible = layLabel.MinVisible;
+            layCityLabel.Style.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
+            layCityLabel.Style.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
+            layCityLabel.Style.Offset = new PointF(3, 3);
+            layCityLabel.Style.Halo = new Pen(Color.Yellow, 2);
+            layCityLabel.TextRenderingHint = TextRenderingHint.AntiAlias;
+            layCityLabel.SmoothingMode = SmoothingMode.AntiAlias;
+            layCityLabel.SRID = 4326;
+            layCityLabel.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
+            layCityLabel.Style.CollisionDetection = true;
+
+            //Add the layers to the map object.
+            //The order we add them in are the order they are drawn, so we add the rivers last to put them on top
+            map.Layers.Add(layCountries);
+            map.Layers.Add(layRivers);
+            map.Layers.Add(layCities);
+            map.Layers.Add(layLabel);
+            map.Layers.Add(layCityLabel);
+
+            //limit the zoom to 360 degrees width
+            map.MaximumZoom = 360;
+            map.BackColor = Color.LightBlue;
+
+            map.ZoomToExtents(); // = 360;
+            map.Center = new Point(0, 0);
+
+            _ogrSampleDataset = "MapInfo";
+
+            Matrix mat = new Matrix();
+            mat.RotateAt(angle, map.WorldToImage(map.Center));
+            map.MapTransform = mat;
+
+            return map;
+        }
+
+        internal static Map InitializeMap(float angle, string[] filenames)
+        {
+            var providers = new SharpMap.Data.Providers.Ogr[filenames.Length];
+            for (int i = 0; i < filenames.Length; i++)
+            {
+                providers[i] = new Ogr(filenames[i]);
+            }
+
+            var map = LayerTools.GetMapForProviders(providers);
+
+            Matrix mat = new Matrix();
+            mat.RotateAt(angle, map.WorldToImage(map.Center));
+            map.MapTransform = mat;
+            map.ZoomToExtents();
+            return map;
+        }
+#endif
