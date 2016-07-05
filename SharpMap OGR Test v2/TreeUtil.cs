@@ -11,6 +11,7 @@ namespace SharpMap_OGR_Test_v2
         //
         // variables for StreamWriter util
         internal static StreamWriter prsw = null;
+
         internal static FileStream prfs = null;
 
         //
@@ -27,7 +28,7 @@ namespace SharpMap_OGR_Test_v2
             thisChild.Name = caption;
             thisChild.Text = caption;
 
-            if (value != null)
+            if (value != null && value != "")
             {
                 // add values as a Grand Child
                 thisGrandChild = new TreeNode();
@@ -45,9 +46,29 @@ namespace SharpMap_OGR_Test_v2
                 DebugUtil.WriteLine("   Value: " + value + ".");
             }
 #endif
-
         }
 
+        // add child not only with no grandchild
+        public static void AddChildNode(TreeNode parent, string caption)
+        {
+            TreeNode thisChild;
+
+            // add caption as a child node
+            thisChild = new TreeNode();
+            thisChild.Name = caption;
+            thisChild.Text = caption;
+
+            parent.Nodes.Add(thisChild);
+
+#if false
+            //generates a lot of output and is redundant if you are printing from your app
+            DebugUtil.WriteLine("Child Node added. Caption:  " + caption);
+            if (value != "")
+            {
+                DebugUtil.WriteLine("   Value: " + value + ".");
+            }
+#endif
+        }
 
         //
         // print all the nodes in the passed tree

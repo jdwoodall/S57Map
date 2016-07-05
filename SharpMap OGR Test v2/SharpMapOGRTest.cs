@@ -41,8 +41,6 @@ namespace SharpMap_OGR_Test_v2
             ds = myS57.Initialize(fileName, 0.0f);
             treeView1.BeginUpdate();
             treeView1.Nodes.Add(myS57.createTree(ds));
-            // the sort method is VERY slow. Don't use it unless it is absolutely necessary to sort the data.
-            // treeView1.Sort();
             treeView1.EndUpdate();
             treeView1.Show();
         }

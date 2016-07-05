@@ -35,7 +35,7 @@
 
                         for (int i = 0; i < coordinates.Length; i++)
                         {
-                            TreeUtil.AddChildNode(thisFeatureChild, coordinates[i].ToString(), "");
+                            TreeUtil.AddChildNode(thisFeatureChild, coordinates[i].ToString());
                         }
                         thisLayerRoot.Nodes.Add(thisFeatureChild);
                     } // if thisFeature

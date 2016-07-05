@@ -99,10 +99,9 @@ namespace SharpMap_OGR_Test_v2
             /* only need to do it once.                                             */
             /* -------------------------------------------------------------------- */
 
-            //  sr can be null.  this is not an error it only meant that there is no sr
-            //  associated with this layer
+            
             OSGeo.OSR.SpatialReference sr = layer.GetSpatialRef();
-
+            // this should not be null
             if (sr != null)
             {
                 sr.ExportToPrettyWkt(out srs_wkt, 1);
@@ -179,7 +178,7 @@ namespace SharpMap_OGR_Test_v2
             thisLayerName = thisLayer.GetName();
             thisLayerTree.Name = thisLayerName;
             thisLayerTree.Text = thisLayerName;
-            TreeUtil.AddChildNode(thisLayerTree, "Feature Count", thisLayer.GetFeatureCount(1).ToString());
+            TreeUtil.AddChildNode(thisLayerTree, "Feature Count = " + thisLayer.GetFeatureCount(1).ToString());
 
             DebugUtil.WriteLine("Layer name: " + thisLayerName);
             DebugUtil.WriteLine("Feature Count: " + thisLayer.GetFeatureCount(1).ToString());
