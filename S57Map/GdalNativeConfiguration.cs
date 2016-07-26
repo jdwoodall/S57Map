@@ -27,7 +27,7 @@
  * DEALINGS IN THE SOFTWARE.
  *****************************************************************************/
 
-namespace SharpMap_OGR_Test_v2
+namespace S57Map
 {
     /// <summary>
     /// Configuration class for GDAL/OGR

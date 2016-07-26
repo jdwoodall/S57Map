@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap OGR Test v2", "SharpMap OGR Test v2\SharpMap OGR Test v2.csproj", "{9827DBB6-6D5A-4CA6-85F3-A1A4D367C07F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S57Map", "S57Map\S57Map.csproj", "{9827DBB6-6D5A-4CA6-85F3-A1A4D367C07F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

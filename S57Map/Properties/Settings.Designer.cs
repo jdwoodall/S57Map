@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SharpMap_OGR_Test_v2.Properties {
+namespace S57Map.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

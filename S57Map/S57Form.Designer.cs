@@ -1,8 +1,8 @@
 ﻿using SharpMap.Forms;
 
-namespace SharpMap_OGR_Test_v2
+namespace S57Map
 {
-    partial class SharpMapOGRTest
+    partial class S57Form
     {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +37,7 @@ namespace SharpMap_OGR_Test_v2
             this.initializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -94,7 +95,8 @@ namespace SharpMap_OGR_Test_v2
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.initializeToolStripMenuItem,
             this.loadToolStripMenuItem,
-            this.treeViewToolStripMenuItem});
+            this.treeViewToolStripMenuItem,
+            this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1029, 24);
@@ -120,8 +122,16 @@ namespace SharpMap_OGR_Test_v2
             this.treeViewToolStripMenuItem.Name = "treeViewToolStripMenuItem";
             this.treeViewToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.treeViewToolStripMenuItem.Text = "TreeView";
+            this.treeViewToolStripMenuItem.Click += new System.EventHandler(this.treeViewToolStripMenuItem_Click);
             // 
-            // SharpMapOGRTest
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // S57Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -129,8 +139,9 @@ namespace SharpMap_OGR_Test_v2
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "SharpMapOGRTest";
-            this.Text = "SharpMap OGR Test";
+            this.Name = "S57Form";
+            this.Text = "SharpMap OGR S-57";
+            this.Load += new System.EventHandler(this.SharpMapOGRForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -151,6 +162,7 @@ namespace SharpMap_OGR_Test_v2
         private SharpMap.Forms.MapBox mapBox1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ToolStripMenuItem treeViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     }
 }
 

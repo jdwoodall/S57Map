@@ -3,70 +3,10 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
-// the code to span the map largely came from ogrinfo which is in gdal\csharp distribution
-
-namespace SharpMap_OGR_Test_v2
+namespace S57Map
 {
-    public partial class S57
+    partial class S57
     {
-        private static DataSource ds;
-        private static string _S57FileName;
-        private static DataSource _S57DataSource;
-        private static string _S57DataSourceName;
-        private static Driver _S57Driver;
-
-        // public functions to retrive DataSource,  DataSourceName, number of layer and driver
-        public static DataSource S57DataSource => _S57DataSource;
-
-        public static string S57DataSourceName => _S57DataSourceName;
-
-        public static int S57NumberLayers() => ds.GetLayerCount();
-
-        public static Driver S57Driver() => _S57Driver;
-
-        //  simple function that only opens the driver and returns a pointer to the provider
-        public DataSource Initialize(String fileName, float angle)
-        {
-            // initialize the debug stuff - check the defaults if you don't call DebugUtil.Config
-            DebugUtil.Initialize();
-
-            // save the dataset name
-            _S57FileName = fileName;
-
-            // register all the drivers so we can find the one we need - this is slow if debug output is on
-            Ogr.RegisterAll();
-
-            // open the specified fileName with update set to R/O (=0)
-            ds = Ogr.Open(fileName, 0);
-            if (ds == null)
-            {
-                MessageBox.Show("Ogr.Open returned a zero.  Make sure your file pathname is correct.");
-                _S57DataSource = null;
-                _S57FileName = "";
-            }
-            else
-            {
-                DebugUtil.WriteLine("DataSource is: " + ds.ToString());
-                DebugUtil.WriteLine("DataSource Name is: " + ds.name.ToString());
-                _S57DataSource = ds;
-                _S57DataSourceName = ds.name;
-
-                Driver drv = ds.GetDriver();
-                _S57Driver = drv;
-
-                if (drv == null)
-                {
-                    MessageBox.Show("S-57 driver is null.  Make sure your drivers are in the correct directory and GDAL_DRV points to them.");
-                    ds = null;
-                }
-                else
-                {
-                    DebugUtil.WriteLine("Driver is: " + drv.ToString());
-                }
-            }
-
-            return ds;
-        }
 
         /// <summary>
         /// Iterates through the layers of the map and builds a tree based on the layer information
@@ -74,8 +14,16 @@ namespace SharpMap_OGR_Test_v2
         /// <param name="ds"></param>
         /// <returns>"TreeNode"</returns>
         ///
-        public TreeNode createTree(DataSource ds)
+        public TreeNode CreateTree(DataSource ds)
         {
+
+            DebugUtil.WriteLine();
+            DebugUtil.WriteLine("*******************************************************************************************************");
+            DebugUtil.WriteLine("****                                      Building Tree                                            ****");
+            DebugUtil.WriteLine("*******************************************************************************************************");
+            DebugUtil.WriteLine();
+
+
             TreeNode topNode = new TreeNode();
             TreeNode metaTree = new TreeNode();
             Layer layer;
@@ -91,7 +39,7 @@ namespace SharpMap_OGR_Test_v2
             metaTree.Text = "Meta Data";
             metaTree.Name = "Meta Data";
 
-            // get layer 0 (should be DSID) for the meta data
+            // get layer 0 (should be "DSID) for the meta data
             layer = ds.GetLayerByIndex(0);
 
             /* -------------------------------------------------------------------- */
@@ -99,7 +47,6 @@ namespace SharpMap_OGR_Test_v2
             /* only need to do it once.                                             */
             /* -------------------------------------------------------------------- */
 
-            
             OSGeo.OSR.SpatialReference sr = layer.GetSpatialRef();
             // this should not be null
             if (sr != null)
@@ -135,7 +82,7 @@ namespace SharpMap_OGR_Test_v2
                 if (layer != null)
                 {
                     // most of the work is done here
-                    BuildLayers(topNode, layer, i);
+                    CreateTreeLayers(topNode, layer, i);
                 }
                 else
                 {
@@ -145,7 +92,7 @@ namespace SharpMap_OGR_Test_v2
                 }
             }
 
-            DebugUtil.WriteLine("TopNode node count is " + topNode.Nodes.Count + ".");
+            DebugUtil.WriteLine("   TopNode node count is " + topNode.Nodes.Count + ".");
 
             // save the tree to a file.  this is controlled by the debug flags.  note that the file can get very large
             TreeUtil.OpenPrintRecursive("TreeNode.txt");
@@ -163,12 +110,15 @@ namespace SharpMap_OGR_Test_v2
         //  to the topNode
         //
 
-        private void BuildLayers(TreeNode parentTree, Layer thisLayer, int layerNumber)
+        private void CreateTreeLayers(TreeNode parentTree, Layer thisLayer, int layerNumber)
         {
             string thisLayerName;
 
             DebugUtil.WriteLine();
-            DebugUtil.WriteLine("++++++      New Layer: " + thisLayer.GetName() + ". Layer Number: " + layerNumber + "      +++++");
+            DebugUtil.WriteLine("++++++      New Layer: " + thisLayer.GetName()
+                + ". Layer Number: " + layerNumber
+                + ". Feature Count: " + thisLayer.GetFeatureCount(1).ToString()
+                + "      +++++");
             DebugUtil.WriteLine();
 
             // build sub-trees by layer.  Under that there will be sub-treas for Features and Fields
@@ -178,16 +128,15 @@ namespace SharpMap_OGR_Test_v2
             thisLayerName = thisLayer.GetName();
             thisLayerTree.Name = thisLayerName;
             thisLayerTree.Text = thisLayerName;
-            TreeUtil.AddChildNode(thisLayerTree, "Feature Count = " + thisLayer.GetFeatureCount(1).ToString());
-
-            DebugUtil.WriteLine("Layer name: " + thisLayerName);
-            DebugUtil.WriteLine("Feature Count: " + thisLayer.GetFeatureCount(1).ToString());
+            //TreeUtil.AddChildNode(thisLayerTree, "Feature Count = " + thisLayer.GetFeatureCount(1).ToString());
 
             // get the features
-            Features(thisLayerTree, thisLayer);
+            CreateTreeFeatures(thisLayerTree, thisLayer);
 
             // add this layer to the parent tree
             parentTree.Nodes.Add(thisLayerTree);
-        }  // BuildLayers
+        }
     }
+
 }
+

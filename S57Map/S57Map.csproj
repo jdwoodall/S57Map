@@ -7,8 +7,8 @@
     <ProjectGuid>{9827DBB6-6D5A-4CA6-85F3-A1A4D367C07F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SharpMap_OGR_Test_v2</RootNamespace>
-    <AssemblyName>SharpMap OGR Test v2</AssemblyName>
+    <RootNamespace>SharpMap_OGR_Test_v3</RootNamespace>
+    <AssemblyName>SharpMap OGR Test v3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -84,6 +84,7 @@
       <HintPath>..\packages\GeoAPI.1.7.2\lib\net40-client\GeoAPI.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.2.0.14.3\lib\net40\Mono.Security.dll</HintPath>
       <Private>True</Private>
@@ -167,25 +168,41 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="S57CreateTree.cs" />
+    <Compile Include="S57Objects.cs" />
     <Compile Include="DebugUtil.cs" />
+    <Compile Include="S57DecodeField.cs" />
     <Compile Include="GdalConfiguration.cs" />
     <Compile Include="GdalNativeConfiguration.cs" />
-    <Compile Include="OGRS57.cs" />
-    <Compile Include="RenderS57.cs" />
+    <Compile Include="S57Initialize.cs" />
+    <Compile Include="S57Render.cs" />
     <Compile Include="S52.cs" />
-    <Compile Include="S57Features.cs" />
-    <Compile Include="SharpMapOGRTest.cs">
+    <Compile Include="S57TreeFeatures.cs">
+      <DependentUpon>S57CreateTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="S57 Options.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SharpMapOGRTest.Designer.cs">
-      <DependentUpon>SharpMapOGRTest.cs</DependentUpon>
+    <Compile Include="S57 Options.Designer.cs">
+      <DependentUpon>S57 Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="S57Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="S57Form.Designer.cs">
+      <DependentUpon>S57Form.cs</DependentUpon>
     </Compile>
     <Compile Include="LayerTools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TreeUtil.cs" />
-    <EmbeddedResource Include="SharpMapOGRTest.resx">
-      <DependentUpon>SharpMapOGRTest.cs</DependentUpon>
+    <Compile Include="TreeUtil.cs">
+      <DependentUpon>S57CreateTree.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="S57 Options.resx">
+      <DependentUpon>S57 Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="S57Form.resx">
+      <DependentUpon>S57Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -197,7 +214,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -208,6 +224,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="S57 Object Names.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

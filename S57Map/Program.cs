@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SharpMap_OGR_Test_v2
+namespace S57Map
 {
     internal static class Program
     {
@@ -16,7 +16,7 @@ namespace SharpMap_OGR_Test_v2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SharpMapOGRTest());
+            Application.Run(new S57Form());
         }
     }
 }

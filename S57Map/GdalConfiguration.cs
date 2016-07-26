@@ -1,3 +1,25 @@
+//////////////////////////////////////////////////////////////////////////////////////
+//
+// This file has been modied to only load the S-57 driver and to add my debug handler
+// instead of the #if DEBUG so that it can be turned on and off without re-compiling.
+// See DebugUtile.cs for more details.
+//
+// Also added the almost trival config method that sets environment variables.
+// No error checking is to done to insure it is a valid OGR or GDAL variable.
+//
+// BIG BIG Note:  This seems to always use the GDAL drivers in the project directory
+//                even though you may have a later version of GDAL somewhere else.
+//                This is not necessarily a bad thing as SharpMap does not run with 
+//                with the latest version of GDAL, Brutiles, or just about any other 
+//                library.  If you want that, you need to rebuild SharpMap and resolve
+//                all the issues.  This is NOT FUN.
+//
+// DW.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//
 /******************************************************************************
  *
  * Name:     GdalConfiguration.cs.pp
@@ -33,7 +55,7 @@ using System.Reflection;
 using Gdal = OSGeo.GDAL.Gdal;
 using Ogr = OSGeo.OGR.Ogr;
 
-namespace SharpMap_OGR_Test_v2
+namespace S57Map
 {
     public static partial class GdalConfiguration
     {
@@ -43,9 +65,13 @@ namespace SharpMap_OGR_Test_v2
         /// <summary>
         /// Function to determine which platform we're on
         /// </summary>
-        private static string GetPlatform()
+        private static string GetPlatform() => IntPtr.Size == 4 ? "x86" : "x64";
+
+        public static bool GdalConfig(string arg1, string arg2)
         {
-            return IntPtr.Size == 4 ? "x86" : "x64";
+            Environment.SetEnvironmentVariable(arg1, arg2);
+
+            return (Environment.GetEnvironmentVariable(arg1) == arg2);
         }
 
         /// <summary>
@@ -120,26 +146,28 @@ namespace SharpMap_OGR_Test_v2
 
         private static void PrintDriversOgr()
         {
-#if DEBUG
-            var num = Ogr.GetDriverCount();
-            for (var i = 0; i < num; i++)
+            if (DebugUtil._debug)
             {
-                var driver = Ogr.GetDriver(i);
-                DebugUtil.WriteLine(string.Format("OGR {0}: {1}", i, driver.name));
+                var num = Ogr.GetDriverCount();
+                for (var i = 0; i < num; i++)
+                {
+                    var driver = Ogr.GetDriver(i);
+                    DebugUtil.WriteLine(string.Format("OGR {0}: {1}", i, driver.name));
+                }
             }
-#endif
         }
 
         private static void PrintDriversGdal()
         {
-#if DEBUG
-            var num = Gdal.GetDriverCount();
-            for (var i = 0; i < num; i++)
+            if (DebugUtil._debug)
             {
-                var driver = Gdal.GetDriver(i);
-                DebugUtil.WriteLine(string.Format("GDAL {0}: {1}-{2}", i, driver.ShortName, driver.LongName));
+                var num = Gdal.GetDriverCount();
+                for (var i = 0; i < num; i++)
+                {
+                    var driver = Gdal.GetDriver(i);
+                    DebugUtil.WriteLine(string.Format("GDAL {0}: {1}-{2}", i, driver.ShortName, driver.LongName));
+                }
             }
-#endif
         }
     }
 }

@@ -1,0 +1,161 @@
+Object Name	Object Code	Object Description	Object Color	Object Display
+ADMARE 	1	Administration  Area (Named)	-1	false
+AIRARE 	2	Airport/airfield 	-1	false
+ACHBRT 	3	Anchor berth 	-1	false
+ACHARE 	4	Anchorage area 	-1	false
+BCNCAR 	5	Beacon, cardinal 	-1	false
+BCNISD 	6	Beacon, isolated danger 	-1	false
+BCNLAT 	7	Beacon, lateral 	-1	false
+BCNSAW 	8	Beacon, safe water 	-1	false
+BCNSPP 	9	Beacon, special purpose/general 	-1	false
+BERTHS 	10	Berth 	-1	false
+BRIDGE 	11	Bridge 	-1	false
+BUISGL 	12	Building, single 	-1	false
+BUAARE 	13	Built-up area 	-1	false
+BOYCAR 	14	Buoy, cardinal 	-1	false
+BOYINB 	15	Buoy, installation 	-1	false
+BOYISD 	16	Buoy, isolated danger 	-1	false
+BOYLAT 	17	Buoy, lateral 	-1	false
+BOYSAW 	18	Buoy, safe water 	-1	false
+BOYSPP 	19	Buoy, special purpose/general 	-1	false
+CBLARE 	20	Cable area 	-1	false
+CBLOHD 	21	Cable, overhead 	-1	false
+CBLSUB 	22	Cable, submarine 	-1	false
+CANALS 	23	Canal 	-1	false
+CANBNK 	24	Canal bank 	-1	false
+CTSARE 	25	Cargo transhipment area 	-1	false
+CAUSWY 	26	Causeway 	-1	false
+CTNARE 	27	Caution area 	-1	false
+CHKPNT 	28	Checkpoint 	-1	false
+CGUSTA 	29	Coastguard station 	-1	false
+COALNE 	30	Coastline 	-1	false
+CONZNE 	31	Contiguous zone 	-1	false
+COSARE 	32	Continental shelf area 	-1	false
+CTRPNT 	33	Control point 	-1	false
+CONVYR 	34	Conveyor 	-1	false
+CRANES 	35	Crane 	-1	false
+CURENT 	36	Current - non-gravitational 	-1	false
+CUSZNE 	37	Custom zone 	-1	false
+DAMCON 	38	Dam 	-1	false
+DAYMAR 	39	Daymark 	-1	false
+DWRTCL 	40	Deep water route centerline 	-1	false
+DWRTPT 	41	Deep water route part 	-1	false
+DEPARE 	42	Depth area 	-1	false
+DEPCNT 	43	Depth contour 	-1	false
+DISMAR 	44	Distance mark 	-1	false
+DOCARE 	45	Dock area 	-1	false
+DRGARE 	46	Dredged area 	-1	false
+DRYDOC 	47	Dry dock 	-1	false
+DMPGRD 	48	Dumping ground 	-1	false
+DYKCON 	49	Dyke 	-1	false
+EXEZNE 	50	Exclusive economic zone 	-1	false
+FAIRWY 	51	Fairway 	-1	false
+FNCLNE 	52	Fence/wall 	-1	false
+FERYRT 	53	Ferry route 	-1	false
+FSHZNE 	54	Fishery zone 	-1	false
+FSHFAC 	55	Fishing facility 	-1	false
+FSHGRD 	56	Fishing ground 	-1	false
+FLODOC 	57	Floating dock 	-1	false
+FOGSIG 	58	Fog signal 	-1	false
+FORSTC 	59	Fortified structure 	-1	false
+FRPARE 	60	Free port area 	-1	false
+GATCON 	61	Gate 	-1	false
+GRIDRN 	62	Gridiron 	-1	false
+HRBARE 	63	Harbour area (administrative) 	-1	false
+HRBFAC 	64	Harbour facility 	-1	false
+HULKES 	65	Hulk 	-1	false
+ICEARE 	66	Ice area 	-1	false
+ICNARE 	67	Incineration area 	-1	false
+ISTZNE 	68	Inshore traffic zone 	-1	false
+LAKARE 	69	Lake 	-1	false
+LAKSHR 	70	Lake shore 	-1	false
+LNDARE 	71	Land area 	-1	false
+LNDELV 	72	Land elevation 	-1	false
+LNDRGN 	73	Land region 	-1	false
+LNDMRK 	74	Landmark 	-1	false
+LIGHTS 	75	Light 	-1	false
+LITFLT 	76	Light float 	-1	false
+LITVES 	77	Light vessel 	-1	false
+LOCMAG 	78	Local magnetic anomaly 	-1	false
+LOKBSN 	79	Lock basin 	-1	false
+LOGPON 	80	Log pond 	-1	false
+MAGVAR 	81	Magnetic variation 	-1	false
+MARCUL 	82	Marine farm/culture 	-1	false
+MIPARE 	83	Military practice area 	-1	false
+MORFAC 	84	Mooring/Warping facility 	-1	false
+NAVLNE 	85	Navigation line 	-1	false
+OBSTRN 	86	Obstruction 	-1	false
+OFSPLF 	87	Offshore platform 	-1	false
+OSPARE 	88	Offshore production area 	-1	false
+OILBAR 	89	Oil barrier 	-1	false
+PILPNT 	90	Pile 	-1	false
+PILBOP 	91	Pilot boarding place 	-1	false
+PIPARE 	92	Pipeline area 	-1	false
+PIPOHD 	93	Pipeline, overhead 	-1	false
+PIPSOL 	94	Pipeline, submarine/on land 	-1	false
+PONTON 	95	Pontoon 	-1	false
+PRCARE 	96	Precautionary area 	-1	false
+PRDARE 	97	Production/storage area 	-1	false
+PYLONS 	98	Pylon/bridge support 	-1	false
+RADLNE 	99	Radar line 	-1	false
+RADRNG 	100	Radar range 	-1	false
+RADRFL 	101	Radar reflector 	-1	false
+RADSTA 	102	Radar station 	-1	false
+RTPBCN 	103	Radar transponder beacon 	-1	false
+RDOCAL 	104	Radio calling-in point 	-1	false
+RDOSTA 	105	Radio station 	-1	false
+RAILWY 	106	Railway 	-1	false
+RAPIDS 	107	Rapids 	-1	false
+RCRTCL 	108	Recommended route centerline 	-1	false
+RECTRC 	109	Recommended track 	-1	false
+RCTLPT 	110	Recommended traffic lane part 	-1	false
+RSCSTA 	111	Rescue station 	-1	false
+RESARE 	112	Restricted area 	-1	false
+RETRFL 	113	Retro-reflector 	-1	false
+RIVERS 	114	River 	-1	false
+RIVBNK 	115	River bank 	-1	false
+ROADWY 	116	Road 	-1	false
+RUNWAY 	117	Runway 	-1	false
+SNDWAV 	118	Sand waves 	-1	false
+SEAARE 	119	Sea area/named water area 	-1	false
+SPLARE 	120	Sea-plane landing area 	-1	false
+SBDARE 	121	Seabed area 	-1	false
+SLCONS 	122	Shoreline construction 	-1	false
+SISTAT 	123	Signal station, traffic 	-1	false
+SISTAW 	124	Signal station, warning 	-1	false
+SILTNK 	125	Silo/tank 	-1	false
+SLOTOP 	126	Slope topline 	-1	false
+SLOGRD 	127	Sloping ground 	-1	false
+SMCFAC 	128	Small craft facility 	-1	false
+SOUNDG 	129	Sounding 	-1	false
+SPRING 	130	Spring 	-1	false
+SQUARE 	131	Square 	-1	false
+STSLNE 	132	Straight territorial sea baseline 	-1	false
+SUBTLN 	133	Submarine transit lane 	-1	false
+SWPARE	134	Swept Area	-1	false
+TESARE 	135	Territorial sea area 	-1	false
+TS_FEB 	160	Tidal stream - flood/ebb 	-1	false
+TS_PRH 	136	Tidal stream - harmonic prediction 	-1	false
+TS_PNH 	137	Tidal stream - non-harmonic prediction 	-1	false
+TS_PAD 	138	Tidal stream panel data 	-1	false
+TS_TIS 	139	Tidal stream - time series 	-1	false
+T_HMON 	140	Tide - harmonic prediction 	-1	false
+T_NHMN 	141	Tide - non-harmonic prediction 	-1	false
+T_TIMS 	142	Tide - time series 	-1	false
+TIDEWY 	143	Tideway 	-1	false
+TOPMAR 	144	Topmark 	-1	false
+TSELNE 	145	Traffic separation line 	-1	false
+TSSBND 	146	Traffic separation scheme boundary 	-1	false
+TSSCRS 	147	Traffic separation scheme crossing 	-1	false
+TSSLPT 	148	Traffic separation scheme lane part 	-1	false
+TSSRON 	149	Traffic separation scheme roundabout 	-1	false
+TSEZNE 	150	Traffic separation zone 	-1	false
+TUNNEL 	151	Tunnel 	-1	false
+TWRTPT 	152	Two-way route part 	-1	false
+UWTROC 	153	Underwater/awash rock 	-1	false
+UNSARE 	154	Unsurveyed area 	-1	false
+VEGATN 	155	Vegetation 	-1	false
+WATTUR 	156	Water turbulence 	-1	false
+WATFAL 	157	Waterfall 	-1	false
+WEDKLP 	158	Weed/Kelp 	-1	false
+WRECKS 	159	Wreck 	-1	false

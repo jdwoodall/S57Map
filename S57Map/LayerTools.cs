@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace SharpMap_OGR_Test_v2
+namespace S57Map
 {
     internal static class LayerTools
     {
@@ -148,25 +148,13 @@ namespace SharpMap_OGR_Test_v2
 
         private static readonly Random Rnd = new Random();
 
-        public static Color GetRandomColor()
-        {
-            return Color.FromArgb(Rnd.Next(0, 127), Rnd.Next(0, 255), Rnd.Next(0, 255), Rnd.Next(0, 255));
-        }
+        public static Color GetRandomColor() => Color.FromArgb(Rnd.Next(0, 127), Rnd.Next(0, 255), Rnd.Next(0, 255), Rnd.Next(0, 255));
 
-        public static Boolean GetRandomBoolean()
-        {
-            return Rnd.Next(0, 2) == 1;
-        }
+        public static Boolean GetRandomBoolean() => Rnd.Next(0, 2) == 1;
 
-        public static Brush GetRandomBrush()
-        {
-            return new SolidBrush(GetRandomColor());
-        }
+        public static Brush GetRandomBrush() => new SolidBrush(GetRandomColor());
 
-        public static Pen GetRandomPen()
-        {
-            return GetRandomPen(1, 4);
-        }
+        public static Pen GetRandomPen() => GetRandomPen(1, 4);
 
         /// <summary>
         /// Generates a random symbol.
@@ -188,18 +176,15 @@ namespace SharpMap_OGR_Test_v2
             return bmp;
         }
 
-        public static SharpMap.Styles.VectorStyle GetRandomVectorStyle()
+        public static SharpMap.Styles.VectorStyle GetRandomVectorStyle() => new SharpMap.Styles.VectorStyle
         {
-            return new SharpMap.Styles.VectorStyle
-            {
-                EnableOutline = GetRandomBoolean(),
-                Outline = GetRandomPen(3, 7),
-                Line = GetRandomPen(1, 4),
-                Fill = GetRandomBrush(),
-                Symbol = GetRandomSymbol(),
-                //SymbolRotation = Rnd.Next(0, 359),
-            };
-        }
+            EnableOutline = GetRandomBoolean(),
+            Outline = GetRandomPen(3, 7),
+            Line = GetRandomPen(1, 4),
+            Fill = GetRandomBrush(),
+            Symbol = GetRandomSymbol(),
+            //SymbolRotation = Rnd.Next(0, 359),
+        };
 
         private static Pen GetRandomPen(int min, int max)
         {

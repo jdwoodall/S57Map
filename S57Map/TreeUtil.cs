@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Forms;
 
-namespace SharpMap_OGR_Test_v2
+namespace S57Map
 {
     public class TreeUtil
     {
