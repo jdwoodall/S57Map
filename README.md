@@ -3,7 +3,8 @@ Notes on S57Map.  There seems to be very little information about how to actuall
 I work on this intermittently, so don't expect huge progress.
 
 ToDo: 
-1. Filter the layers to actually display. I doubt anyone would want to display them all. 
+
+1. Filter the layers to actually display. I doubt anyone would want to display them all. There needs to be an option panel to control which layers to display added.  Which leads to #2.
 
 2. Get some configuration control system working.  Most likely will use the .net config stuff.
 
