@@ -11,6 +11,5 @@ far yet.
 
 The basic struction of each layer is exactly the same.  The first set of elements are the "Feature Definitions".  Each "Feature Defintion" has a name.
 
-  This dataset tells us 
-how to interpret the next layer.  For example, it contains data such as what data type each element, how many digits it contains, and what 
+This dataset tells us how to interpret the next layer.  For example, it contains data such as what data type each element, how many digits it contains, and what 
 precision it has.

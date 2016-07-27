@@ -5,7 +5,7 @@ ACHBRT 	3	Anchor berth 	-1	false
 ACHARE 	4	Anchorage area 	-1	false
 BCNCAR 	5	Beacon, cardinal 	-1	false
 BCNISD 	6	Beacon, isolated danger 	-1	false
-BCNLAT 	7	Beacon, lateral 	-1	false
+BCNLAT 	7	Beacon, lateral 	-1	true
 BCNSAW 	8	Beacon, safe water 	-1	false
 BCNSPP 	9	Beacon, special purpose/general 	-1	false
 BERTHS 	10	Berth 	-1	false
@@ -69,7 +69,7 @@ ICNARE 	67	Incineration area 	-1	false
 ISTZNE 	68	Inshore traffic zone 	-1	false
 LAKARE 	69	Lake 	-1	false
 LAKSHR 	70	Lake shore 	-1	false
-LNDARE 	71	Land area 	-1	false
+LNDARE 	71	Land area 	-1	true
 LNDELV 	72	Land elevation 	-1	false
 LNDRGN 	73	Land region 	-1	false
 LNDMRK 	74	Landmark 	-1	false

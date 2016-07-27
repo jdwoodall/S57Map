@@ -17,6 +17,8 @@ namespace S57Map
             internal string ObjectDescription;
             internal int ObjectColor;
             internal bool ObjectDisplay;
+
+            public static int objectPointer { get; internal set; }
         }
 
         internal List<S57Object> S57ObjectsList = new List<S57Object>();
@@ -27,10 +29,13 @@ namespace S57Map
         internal S57Objects()
         {
             string csvPath;
+            int objectPointer = 0;
+            int numberOfObjects = 0;
+
 
             // this path needs to go in the config file and option panel
             csvPath = System.AppDomain.CurrentDomain.BaseDirectory;
-            csvPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\S-57 Object Names.csv"));
+            csvPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\S57 Object Names.csv"));
             //csvPath = @"d:\Users\dwoodall\Documents\Visual Studio 2015\Projects\S57Map\S57Map\S-57 Object Names.csv";
 
             // there are a lot of ways to do this.  it would probably be better to use and XML file for this
@@ -69,6 +74,30 @@ namespace S57Map
         internal S57Object FindObjectName(string objectName)
         {
             return S57ObjectsList.Find(x => x.ObjectName.Equals(objectName));
+        }
+
+        internal S57Object GetFirstObject()
+        {
+            S57Object.objectPointer = 0;
+            return S57ObjectsList[0];
+        }
+
+        internal int GetCount()
+        {
+            return S57ObjectsList.Count;
+        }
+
+        internal S57Object GetNextObject()
+        {
+            if (S57Object.objectPointer == S57ObjectsList.Count)
+            {
+                return null;
+            }
+            else
+            {
+                S57Object.objectPointer++;
+                return S57ObjectsList[S57Object.objectPointer];
+            }
         }
 
         internal S57Object FindObjectCode(int objectCode)

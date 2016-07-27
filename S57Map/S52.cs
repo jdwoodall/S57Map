@@ -11,7 +11,7 @@ namespace S57Map
         static public VectorLayer Render(ref VectorLayer vectorLayer, Ogr layerProvider, OSGeo.OGR.Feature feature, OSGeo.OGR.FieldDefn field, string WKTGeometry)
         {
             Random rnd = new Random(9);
-            return vectorLayer;
+            // return vectorLayer;
 
             Map map = new Map();
 
@@ -37,6 +37,7 @@ namespace S57Map
                                        Convert.ToInt32(rnd.NextDouble() * 255), Convert.ToInt32(rnd.NextDouble() * 255)),
                         Convert.ToInt32(rnd.NextDouble() * 3));
             }
+
             return vectorLayer;
         }
     }
