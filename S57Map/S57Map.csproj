@@ -249,9 +249,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Misc Code.txt" />
     <Content Include="S57Notes.txt" />
   </ItemGroup>

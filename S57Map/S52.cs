@@ -122,7 +122,7 @@ namespace S57Map
                 new colorMap() { Name = ColorName.UINFR, color = "red",         R = 234,    G = 84,     B = 113,    T = 0.8f }
         };
 
-        // gets the RGBI of the given color from the color map
+        // gets the RGBI of the given color from the color map - this includes the transparency
         // only here to shorten up the graphics calls since this is used each time
         static public Color colorMaptoRGBI(ColorName Name)
         {
@@ -133,6 +133,16 @@ namespace S57Map
         }
 
 
+        // gets the RGB of the given color from the color map - transparency is NOT included.
+        // only here to shorten up the graphics calls since this is used each time
+        static public Color colorMaptoRGB(ColorName Name)
+        {
+            Color tColor;
+
+            tColor = Color.FromArgb(dayMap[(int)Name].R, dayMap[(int)Name].G, dayMap[(int)Name].B);
+            return tColor;
+        }
+
         // Actual drawing is done here.  This needs a lot of work.
         // To Do:
         // Pen and Brush width should not be fixed.
@@ -140,11 +150,13 @@ namespace S57Map
         // Assigning the outline colors instead of using black
 
         //static public VectorLayer Render(ColorName cName, ref VectorLayer vectorLayer, Ogr layerProvider, OSGeo.OGR.Feature feature, OSGeo.OGR.FieldDefn field, string WKTGeometry)
-        static public VectorLayer Render(S57.S57Layer layerCollection)
+        //static public VectorLayer Render(S57.S57Layer layerCollection)
+        static public VectorLayer Render(string layerName, SharpMap.Data.FeatureDataSet fds)
         { 
             Map map = new Map();
+            VectorLayer vectorLayer = new VectorLayer(layerName);
 
-            if (layerProvider.OgrGeometryTypeString.IndexOf("Polygon") > 0)
+           /*  if (layerProvider.OgrGeometryTypeString.IndexOf("Polygon") > 0)
             {
                 vectorLayer.Style.Fill = new SolidBrush(colorMaptoRGBI(cName));
                 vectorLayer.Style.Outline = new Pen(colorMaptoRGBI(ColorName.CHBLK), 3.0f);
@@ -154,8 +166,9 @@ namespace S57Map
             {
                 vectorLayer.Style.Line = new Pen(colorMaptoRGBI(ColorName.CHBLK), 3.0f);
             }
+            */
 
-            return vectorLayer;
+            return vectorLayer; 
         }
     }
 }

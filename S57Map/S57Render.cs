@@ -1,5 +1,6 @@
 ﻿using OSGeo.OGR;
 using SharpMap;
+using SharpMap.Data;
 using SharpMap.Layers;
 using System.Windows.Forms;
 
@@ -13,10 +14,10 @@ namespace S57Map
         /// </summary>
         public class S57Layer
         {
-            private string layerName;
-            private int layercode;
-            private S52.ColorName fillColor;
-            private S52.ColorName outlineColor;
+            internal string layerName;
+            internal int layercode;
+            internal S52.ColorName fillColor;
+            internal S52.ColorName outlineColor;
         }
 
         /// <summary>
@@ -36,6 +37,7 @@ namespace S57Map
             Cursor.Current = Cursors.WaitCursor;
 
             S57Layer layerCollection = new S57Layer();
+            SharpMap.Data.FeatureDataSet fds = new FeatureDataSet();
 
             VectorLayer vectorLayer;
             Map map = new Map();
@@ -71,7 +73,7 @@ namespace S57Map
             {
                 if (myS57Objects.GetDisplayFlag(i))
                 {
-
+                    layerCollection.layerName = myS57Objects.S57ObjectsList[i].ObjectName;
                 }
             }
 
@@ -141,7 +143,7 @@ namespace S57Map
                                         vectorLayer = new VectorLayer(thisLayer.GetName(), dataProvider);
                                         DebugUtil.WriteLine("Rendering: " + WKTGeometry);
                                         //vectorLayer = S52.Render(ref vectorLayer, dataProvider, thisFeature, fieldDefn, WKTGeometry);
-                                        vectorLayer = S52.Render(layerCollection);
+                                        vectorLayer = S52.Render(thisLayer.GetName(), fds);
                                         map.Layers.Add(vectorLayer);
                                         //vectorLayer.Dispose();
                                     }
@@ -156,7 +158,7 @@ namespace S57Map
                                                 vectorLayer = new VectorLayer(thisLayer.GetName(), dataProvider);
                                                 DebugUtil.WriteLine("Rendering: " + WKTGeometry);
                                                 //vectorLayer = S52.Render(ref vectorLayer, dataProvider, thisFeature, fieldDefn, WKTGeometry);
-                                                vectorLayer = S52.Render(layerCollection);
+                                                vectorLayer = S52.Render(thisLayer.GetName(), fds);
                                                 map.Layers.Add(vectorLayer);
                                                 //vectorLayer.Dispose();
                                             }
