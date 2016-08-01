@@ -6,11 +6,11 @@ namespace S57Map
     public class DebugUtil
     {
         // debug config items with their defaults
-        internal static bool _debug = true;
+        internal static bool _debug = false;
 
         internal static bool _dbgConsole = false;
         internal static bool _json = false;
-        internal static bool _dbgFile = true;
+        internal static bool _dbgFile = false;
         internal static bool _dbgTree = false;
 
         //File and Stream for debug file

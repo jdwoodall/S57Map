@@ -16,7 +16,7 @@ namespace S57Map
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new S57Form());
+            Application.Run(new S57Map());
         }
     }
 }

@@ -1,0 +1,26 @@
+Colour X Y L Tokens
+white .28 .31 36 ships, pstrk, sndg2, chwht, uinfd
+grey  .28 .31 20 depsc, cstln, chgrd, chblk, uibdr.uinff, resgr
+grey  .28 .31 10 depcn, chgrf, sndg1, sytrk, res01, res02, res03
+grey .28 .31 7.0 nodta
+grey .28 .31 .72 bkaj2
+black .28 .31 00 depdw, uibck, outlw, bkaj1
+blue .18 .15 10 resbl, uinfb
+blue .21 .22 5.0 depvs, uiafd
+blue .23 .25 3.0 depms
+blue .25 .29 1 depmd
+magenta .28 .24 18 trfcd, chmgd, isdng, uinfm
+magenta .30 .17 7.0 trfcf, chmgf
+green .31 .26  20 radhi, chgrn, litgn, uinfg
+green .31 .56 7 radlo
+blue-green .26 .42 17 arpat
+yellowgreen .26 .36 6.0 Depit
+yellow .41 .49 70 chylw, lityw
+yellow .41 .49 35 adinf
+brown .45 .42 15 UIAFF
+brown .45 .42 30 LANDF
+brown .39 .43 CHBRN
+brown .25 .39 .8 LANDA OUTLL
+orange .50 .40 10 cursr, ninfo, chcor, aplrt, sclbr, uinfo
+red .58 .35 18 Plrte
+red .48 .30 25 DNGHL, CHRED, LITRD, UINFR

@@ -13,3 +13,33 @@ The basic struction of each layer is exactly the same.  The first set of element
 
 This dataset tells us how to interpret the next layer.  For example, it contains data such as what data type each element, how many digits it contains, and what 
 precision it has.
+
+
+S-52 Notes
+
+This refers to S-52 version 6.0, March 2010.
+
+The current S-52 library is only available if you buy it from IHO for 500 Euros.  Screw that.  I don't know how much difference there is between the last
+released set and the one you have to buy.  Hey Visual Studio, how about some wordwrap on text documents.
+
+There are 63 possible color plus transparent making the total colors 64.
+
+There are three rendering sets; day, dusk, and night.  Each rendering set uses 24 color.  
+
+Colors in each rendering set have the same names, but different values.  Values are given in XYL form and need to be converted to RGB.
+Within each rendering set there are mutliple colors with the same name but different values.  For example, brown has three values.
+
+I think the easiest way to do this is to make a table with the 24 colors in it and initialize it for Day, Dusk, or Night.  I guess you could make three tables 
+and use the one that suits you.
+
+The tables also contain the code of of the S-57 object, sort of.  It does not specify the layer number, but uses a color name.  Somewhere their needs to be 
+a mapping from the layer names to the color names that are used.  THe best I have come up with is from the description of the USE of the color in the last table.
+
+The last table is the color name to what it is used for.  It does not give layer names.  Also, unfortunately, it does not say which version of the color.
+So, if I look at CHGRN it says it is green an dused for bouys, but it doesn't say which green that is.
+
+I honestly think that almost any high school kid could do a better job writing this documentation than the IHO did.  At least you would be able to understand it.
+
+The final bit of the S-52 puzzle are the symbols to use.  Again, they are only contained in the 500 Euro package, so we will look for alternatives.  I am thinking 
+I will use some sort of SVG graphics so that they will scale as I zoom in and out, but I haven't thought much more about that so for.  I will likely use little 
+blobs for initially.

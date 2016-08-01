@@ -14,7 +14,7 @@ namespace S57Map
         /// <param name="ds"></param>
         /// <returns>"TreeNode"</returns>
         ///
-        public TreeNode CreateTree(DataSource ds)
+        public static TreeNode CreateTree()
         {
 
             DebugUtil.WriteLine();
@@ -110,7 +110,7 @@ namespace S57Map
         //  to the topNode
         //
 
-        private void CreateTreeLayers(TreeNode parentTree, Layer thisLayer, int layerNumber)
+        private static void CreateTreeLayers(TreeNode parentTree, Layer thisLayer, int layerNumber)
         {
             string thisLayerName;
 

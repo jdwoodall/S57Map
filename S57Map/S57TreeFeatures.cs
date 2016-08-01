@@ -9,7 +9,7 @@ namespace S57Map
         // This is the list of all the fields we will collect data on and render.  They will not exist for all features. They are not order dependent except
         // that the order they are in is the the order they will be in the tree.  I try to keep the sorted.
         //
-        internal string[] fieldList = { "BCNSHP", "CATACH", "CATCBL", "CATOBJ", "CATWRK", "CATZOC", "COLOUR", "COLPAT", "DRVAL1", "DRVAL2", "EXPSOU", "HORCLR",
+        static internal string[] fieldList = { "BCNSHP", "CATACH", "CATCBL", "CATOBJ", "CATWRK", "CATZOC", "COLOUR", "COLPAT", "DRVAL1", "DRVAL2", "EXPSOU", "HORCLR",
                 "HEIGHT", "INFORM", "OBJL", "SCAMAX", "SCAMIN", "SOUNDG", "STATUS", "TRAFIC", "TXTDSC", "VALSOU", "VERCCL", "VERCLR", "VERCOP", "VERDAT" };
 
         /* --------------------------------------------------------------------
@@ -21,7 +21,7 @@ namespace S57Map
         *
         * --------------------------------------------------------------------*/
 
-        protected void CreateTreeFeatures(TreeNode parentLayerTree, Layer thisLayer)
+        protected static void CreateTreeFeatures(TreeNode parentLayerTree, Layer thisLayer)
         {
             FeatureDefn featureDefn;
 

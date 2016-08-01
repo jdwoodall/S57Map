@@ -1,43 +1,22 @@
 ﻿using OSGeo.OGR;
 using SharpMap;
 using SharpMap.Layers;
+using System;
+
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace S57Map
 {
     public partial class S57
     {
-        /// <summary>
-        /// This is the data structure we are going to build for each layer.  It needs to be homogeneous for all display layers.
-        ///
-        /// </summary>
-        public class S57Layer
-        {
-            private string layerName;
-            private int layercode;
-            private S52.ColorName fillColor;
-            private S52.ColorName outlineColor;
-        }
-
-        /// <summary>
-        /// Render is where most of the work is done.  It builds a list of graphics items to be displayed and calls the S-52 rendorer to actually display them.
-        /// We could pass the layer, but that would mean that the S-52 code would have to decipher the layers.  It seems easier just to build a list and let S-52
-        /// only take care of the colors, symbol, and tiling.
-        ///
-        /// The goal is to create one list for each layer in the S57 record and have S52 render that layer.
-        ///
-        /// S-52 will return a map of the collective layers to display.  This can then either be displayed or tiled or both.
-        /// </summary>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        public static Map Render(DataSource ds)
+        public Map Render(float angle)
         {
             // the the cursor to the little swirling circle
             Cursor.Current = Cursors.WaitCursor;
 
-            S57Layer layerCollection = new S57Layer();
-
             VectorLayer vectorLayer;
+            Random rnd = new Random(9);
             Map map = new Map();
 
             int featureCount;
@@ -51,6 +30,7 @@ namespace S57Map
             OSGeo.OGR.Feature thisFeature;
             OSGeo.OGR.FeatureDefn featureDefn;
             OSGeo.OGR.FieldDefn fieldDefn;
+            OSGeo.OGR.DataSource ds;
             OSGeo.OGR.Layer thisLayer;
 
             Geometry geometry;
@@ -62,18 +42,7 @@ namespace S57Map
             DebugUtil.WriteLine("****************************************************************************");
 
             // get the datasource that is currently open
-            // ds = S57.DataSource;
-
-            // we are only displaying the layers that our config data says to.
-            int count = S57.myS57Objects.GetCount();
-
-            for (int i = 0; i < count; i++)
-            {
-                if (myS57Objects.GetDisplayFlag(i))
-                {
-
-                }
-            }
+            ds = S57.DataSource;
 
             for (int iLayer = 0; iLayer < ds.GetLayerCount(); iLayer++)
             {
@@ -96,10 +65,10 @@ namespace S57Map
                 dataProvider = new SharpMap.Data.Providers.Ogr(S57.FileName, iLayer);
 
                 // make sure the dataprovider is open
-                if (!dataProvider.IsOpen)
-                {
-                    dataProvider.Open();
-                }
+                //if (!dataProvider.IsOpen)
+                //{
+                //    dataProvider.Open();
+                //}
 
                 //featureCount = thisLayer.GetFeatureCount(0);
                 //for (iFeatureCount = 0; iFeatureCount < featureCount; iFeatureCount++)
@@ -140,8 +109,7 @@ namespace S57Map
                                         geometry.ExportToWkt(out WKTGeometry);
                                         vectorLayer = new VectorLayer(thisLayer.GetName(), dataProvider);
                                         DebugUtil.WriteLine("Rendering: " + WKTGeometry);
-                                        //vectorLayer = S52.Render(ref vectorLayer, dataProvider, thisFeature, fieldDefn, WKTGeometry);
-                                        vectorLayer = S52.Render(layerCollection);
+                                        vectorLayer = S52.Render(ref vectorLayer, dataProvider, thisFeature, fieldDefn, WKTGeometry);
                                         map.Layers.Add(vectorLayer);
                                         //vectorLayer.Dispose();
                                     }
@@ -155,8 +123,7 @@ namespace S57Map
                                                 sub_geometry.ExportToWkt(out WKTGeometry);
                                                 vectorLayer = new VectorLayer(thisLayer.GetName(), dataProvider);
                                                 DebugUtil.WriteLine("Rendering: " + WKTGeometry);
-                                                //vectorLayer = S52.Render(ref vectorLayer, dataProvider, thisFeature, fieldDefn, WKTGeometry);
-                                                vectorLayer = S52.Render(layerCollection);
+                                                vectorLayer = S52.Render(ref vectorLayer, dataProvider, thisFeature, fieldDefn, WKTGeometry);
                                                 map.Layers.Add(vectorLayer);
                                                 //vectorLayer.Dispose();
                                             }
@@ -174,9 +141,9 @@ namespace S57Map
 
             map.ZoomToExtents();
 
-            //Matrix mat = new Matrix();
-            //mat.RotateAt(angle, map.WorldToImage(map.Center));
-            //map.MapTransform = mat;
+            Matrix mat = new Matrix();
+            mat.RotateAt(angle, map.WorldToImage(map.Center));
+            map.MapTransform = mat;
 
             // change back to the defaul cursor
             Cursor.Current = Cursors.Default;

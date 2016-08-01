@@ -9,25 +9,25 @@ namespace S57Map
 {
     public partial class S57
     {
-        private static DataSource ds;
+        // some private variables used to access driver related info
         private static string _S57FileName;
         private static DataSource _S57DataSource;
         private static string _S57DataSourceName;
         private static Driver _S57Driver;
 
         // public functions to retrieve DataSource,  DataSourceName, number of layer and driver
-        public static DataSource DataSource => _S57DataSource;
+        private static DataSource DataSource => _S57DataSource;
 
-        public static string DataSourceName => _S57DataSourceName;
+        private static string DataSourceName => _S57DataSourceName;
 
-        public static string FileName => _S57FileName;
+        private static string FileName => _S57FileName;
 
-        public static int NumberLayers() => ds.GetLayerCount();
+        private static int NumberLayers() => ds.GetLayerCount();
 
-        public static Driver Driver() => _S57Driver;
+        private static Driver Driver() => _S57Driver;
 
         //  simple function that only opens the driver and returns a pointer to the provider
-        public DataSource Initialize(String fileName)
+        private static DataSource OpenMap(String fileName)
         {
             // save the dataset name
             _S57FileName = fileName;

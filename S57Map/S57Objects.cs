@@ -6,10 +6,11 @@ using System.Windows.Forms;
 
 namespace S57Map
 {
-    internal class S57Objects
+    public class S57Objects
     {
         // this class holds the various fields that describe S-57 objects.  These are the same as the OGR Layer Names.  The Object Code is the
         // same as the OBJL member in OGR.
+
         internal class S57Object
         {
             internal string ObjectName;
@@ -29,14 +30,10 @@ namespace S57Map
         internal S57Objects()
         {
             string csvPath;
-            int objectPointer = 0;
-            int numberOfObjects = 0;
-
 
             // this path needs to go in the config file and option panel
             csvPath = System.AppDomain.CurrentDomain.BaseDirectory;
             csvPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\S57 Object Names.csv"));
-            //csvPath = @"d:\Users\dwoodall\Documents\Visual Studio 2015\Projects\S57Map\S57Map\S-57 Object Names.csv";
 
             // there are a lot of ways to do this.  it would probably be better to use and XML file for this
             // but for now I will use a CSV file.
@@ -51,7 +48,6 @@ namespace S57Map
                     // Skip over header line.
                     parser.ReadLine();
 
-
                     while (!parser.EndOfData)
                     {
                         S57Object tempObject = new S57Object();
@@ -61,6 +57,7 @@ namespace S57Map
                         tempObject.ObjectDescription = fields[2];
                         tempObject.ObjectColor = Convert.ToInt32(fields[3]);
                         tempObject.ObjectDisplay = Convert.ToBoolean(fields[4]);
+
                         S57ObjectsList.Add(tempObject);
                     }
                 }
@@ -80,6 +77,18 @@ namespace S57Map
         {
             S57Object.objectPointer = 0;
             return S57ObjectsList[0];
+        }
+
+        internal S57Object GetObject(int iobject)
+        {
+            if (iobject < S57ObjectsList.Count)
+            {
+                return S57ObjectsList[iobject];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         internal int GetCount()
@@ -105,7 +114,7 @@ namespace S57Map
             return S57ObjectsList.Find(t => t.ObjectCode.Equals(objectCode));
         }
 
-        internal bool SetDisplayFlag(string objectName)
+        internal void SetDisplayFlag(string objectName, bool newValue)
         {
             S57Object tempObject;
 
@@ -113,11 +122,13 @@ namespace S57Map
 
             if (tempObject != null)
             {
-                tempObject.ObjectDisplay = true;
-                return true;
+                tempObject.ObjectDisplay = newValue;
             }
-            else
-                return false;
+        }
+
+        public void SetDisplayFlag(int index, bool newValue)
+        {
+            S57ObjectsList[index].ObjectDisplay = newValue;
         }
 
         internal bool GetDisplayFlag(string objectName)
@@ -132,6 +143,11 @@ namespace S57Map
             }
             else
                 return false;
+        }
+
+        public bool GetDisplayFlag(int index)
+        {
+            return S57ObjectsList[index].ObjectDisplay;
         }
     }
 }
